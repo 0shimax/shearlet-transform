@@ -5,10 +5,8 @@ import skimage.data
 from skimage import img_as_float
 from skimage.transform import resize
 
-from _scales_shears_and_spectra import scales_shears_and_spectra
 from _inverse_shearlet_transform_spect import inverse_shearlet_transform_spect
 from _shearlet_transform_spect import shearlet_transform_spect
-from _fft import ifftnc  # centered nD inverse FFT
 
 
 def add_cbar(im, ax):
@@ -36,4 +34,11 @@ plt.show()
 plt.imshow(ST[..., 20], interpolation='nearest', cmap=plt.cm.gray)
 plt.colorbar()
 plt.title('Frame Tightness')
+plt.show()
+
+
+XX = inverse_shearlet_transform_spect(ST, Psi)
+plt.imshow(np.abs(X-XX), cmap=plt.cm.gray)
+plt.colorbar()
+plt.title('Transform Exactness')
 plt.show()
