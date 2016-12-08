@@ -6,63 +6,36 @@ from _fft import fftshift, ifftshift, fftn, ifftn
 
 
 def inverse_shearlet_transform_spect(ST, Psi=None, maxScale='max',
-                                  shearletSpect=meyer_shearlet_spect,
-                                  shearletArg=meyeraux):
-    """Compute inverse shearlet transform.
-    If the shearlet spectra, Psi, are not given they are computed using
-    parameters guessed from the coefficients.
-    Parameters
-    ----------
-    ST : array (3d)
-        shearlet transform
-    Psi : array (3d), optional
-        3d spectrum of shearlets
-    maxScale : {'min', 'max'}
-        maximal or minimal finest scale
-    shearletSpect : {meyerShearletSpect, meyerSmoothShearletSpect}
-        shearlet spectrum to use
-    shearletArg : function
-        auxiliarry function for the shearlet
-    Returns
-    -------
-    A : array (2d)
-        reconstructed image
-    """
-
+                                  shearlet_spect=meyer_shearlet_spect,
+                                  shearlet_arg=meyeraux):
     if Psi is None:
-        # numOfScales
+        # num_of_scales
         # possible: 1, 4, 8, 16, 32,
         # -> -1 for lowpass
         # -> divide by for (1, 2, 4, 8,
         # -> +1 results in a 2^# number -> log returns #
-        numOfScales = int(np.log2((ST.shape[-1] - 1)/4 + 1))
+        num_of_scales = int(np.log2((ST.shape[-1] - 1)/4 + 1))
 
-        # realCoefficients
-        realCoefficients = True
+        # real_coefficients
+        real_coefficients = True
 
-        # realReal
-        realReal = True
+        # real_real
+        real_real = True
 
         # compute spectra
-        Psi = scalesShearsAndSpectra((ST.shape[0], ST.shape[1]),
-                                     numOfScales=numOfScales,
-                                     realCoefficients=realCoefficients,
-                                     realReal=realReal,
-                                     shearletSpect=meyerShearletSpect,
-                                     shearletArg=meyeraux)
+        Psi = scales_shears_and_spectra((ST.shape[0], ST.shape[1]),
+                                     num_of_scales=num_of_scales,
+                                     real_coefficients=real_coefficients,
+                                     real_real=real_real,
+                                     shearlet_spect=meyershearlet_spect,
+                                     shearlet_arg=meyeraux)
 
     # inverse shearlet transform
-    if False:
-        # INCORRECT TO HAVE FFTSHIFT SINCE Psi ISNT SHIFTED!
-        A = fftshift(fftn(ST, axes=(0, 1)), axes=(0, 1)) * Psi
-        A = A.sum(axis=-1)
-        A = ifftn(ifftshift(A))
-    else:
-        A = fftn(ST, axes=(0, 1)) * Psi
-        A = A.sum(axis=-1)
-        A = ifftn(A)
+    image_2d = fftn(ST, axes=(0, 1)) * Psi
+    image_2d = image_2d.sum(axis=-1)
+    image_2d = ifftn(image_2d)
 
     if np.isrealobj(ST):
-        A = A.real
+        image_2d = image_2d.real
 
-    return A
+    return image_2d
