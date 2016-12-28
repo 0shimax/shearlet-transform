@@ -9,7 +9,7 @@ def inverse_shearlet_transform_spect(ST, Psi=None, maxScale='max',
                                   shearlet_spect=meyer_shearlet_spect,
                                   shearlet_arg=meyeraux):
     if Psi is None:
-        # num_of_scales
+        # num_of_scales 
         # possible: 1, 4, 8, 16, 32,
         # -> -1 for lowpass
         # -> divide by for (1, 2, 4, 8,

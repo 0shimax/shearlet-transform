@@ -73,7 +73,7 @@ __all__ = ['fft', 'fft2', 'fftn', 'fftshift', 'fftfreq',
            'ifft', 'ifft2', 'ifftn', 'ifftshift',
            'fftnc', 'ifftnc', 'has_pyfftw']
 if has_pyfftw:
-    # the following functions are PyFFTW dependent
+    # the following functions are PyFFTW dependent -
     __all__ += ['build_fftn', 'build_ifftn', 'pyfftw_threads']
 
 

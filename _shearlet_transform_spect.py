@@ -13,7 +13,7 @@ def shearlet_transform_spect(image_2d, Psi=None, num_of_scales=None,
     # parse input
     image_2d = np.asarray(image_2d)
     if (image_2d.ndim != 2) or np.any(np.asarray(image_2d.shape) <= 1):
-        raise ValueError("2D image required")
+        raise ValueError("2D image required.")
 
     # compute spectra
     if Psi is None:

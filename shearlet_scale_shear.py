@@ -30,7 +30,7 @@ def _jk2index(j, k, cone):
 
 
 def _index2jk(index):
-    """helper function: compute j, k and cone from index. """
+    """helper function: compute j, k and cone from index."""
     if index <= 1:  # lowpass, j and k not needed:
         j = np.NaN
         k = np.NaN

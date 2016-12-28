@@ -4,7 +4,6 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 import skimage.data
 from skimage import img_as_float
 from skimage.transform import resize
-
 from _inverse_shearlet_transform_spect import inverse_shearlet_transform_spect
 from _shearlet_transform_spect import shearlet_transform_spect
 

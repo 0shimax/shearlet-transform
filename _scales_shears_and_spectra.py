@@ -16,7 +16,7 @@ def scales_shears_and_spectra(shape, num_of_scales=None,
                            shearlet_arg=meyeraux, real_real=True,
                            fftshift_spectra=True):
     if len(shape) != 2:
-        raise ValueError("2D image dimensions required")
+        raise ValueError("2D image dimensions required.")
 
     if num_of_scales is None:
         num_of_scales = _default_number_of_scales(shape)

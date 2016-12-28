@@ -100,7 +100,7 @@ def meyer_smooth_shearlet_spect(x, y, a, s, real_coefficients=True,
     # set values with x=0 to 1 (for division)
     # xx = (np.abs(x)==0) + (np.abs(x)>0)*x
 
-    # compute spectrum
+    # compute spectrum.
     W = np.sqrt((meyer_scaling(2**(-2)*x, meyeraux_func) *
                  meyer_scaling(2**(-2)*y, meyeraux_func))**2 -
                 (meyer_scaling(x, meyeraux_func) *
